@@ -126,12 +126,12 @@ input[type="checkbox"] {
 
 /* When checkbox is checked, style the parent label */
 .case.checked {
-    border-color: #4c6dff;
+    border-color: #a5f2f8;
     background-color: #32374a;
 }
 
 .case.checked:hover {
-    border-color: #4c6dff;
+    border-color: #a5f2f8;
     background-color: #3f4764;
 }
 
@@ -171,7 +171,7 @@ button {
 
 button:hover {
     background-color: #3a3a3a;
-    border-color: #4c6dff;
+    border-color: #a5f2f8;
 }
 
 .top-bar {
@@ -196,7 +196,7 @@ button:hover {
 
 .bar-btn:hover {
     background-color: #3a3a3a;
-    border-color: #4c6dff;
+    border-color: #a5f2f8;
 }
 
 .bar-scramble {

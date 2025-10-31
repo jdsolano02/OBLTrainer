@@ -607,6 +607,9 @@ let readyToStart = false;
 let otherKeyPressed = 0;
 const startDelay = 0;
 
+let currentCase = "";
+let previousCase = "";
+
 // HTML elements
 
 // Top bar buttons
@@ -623,6 +626,7 @@ const filterInputEl = document.getElementById("filter");
 
 const eachCaseEl = document.getElementById("allcases");
 const karnEl = document.getElementById("karn");
+const removeLastEl = document.getElementById("unselprev")
 
 // Selection buttons
 const selectAllEl = document.getElementById("sela");
@@ -874,6 +878,9 @@ function generateScramble() {
     let caseNum = randInt(0, remainingOBL.length - 1);
     OBLChoice = remainingOBL.splice(caseNum, 1);
 
+    previousCase = currentCase
+    currentCase = OBLChoice
+
     OBLChoice = OBLtranslation[OBLChoice];
     OBLChoice = OBLChoice[randInt(0, OBLChoice.length - 1)];
     scramble = getScramble(OBLChoice);
@@ -905,8 +912,9 @@ function generateScramble() {
 
     if (scrambleList.length != 0) {
         previousScramble = scrambleList.at(-1)[usingKarn];
-        previousScrambleEl.textContent =
-            "Previous scramble : " + previousScramble;
+        previousScrambleEl.innerHTML =
+            "Previous scramble: " + previousScramble + 
+            ' <span style="white-space: nowrap;">( ' + OBLname(previousCase) + ' )</span>';
     }
     if (!hasActiveScramble) {
         timerEl.textContent = "0.00";
@@ -1408,6 +1416,12 @@ eachCaseEl.addEventListener("change", (e) => {
         enableGoEachCase(eachCase);
     }
 });
+
+removeLastEl.addEventListener("click", () => {
+    if (previousCase != "") {
+        deselectPBL(previousCase)
+    }
+})
 
 karnEl.addEventListener("change", (e) => {
     usingKarn ^= 1; // switches between 0 and 1 with XOR
