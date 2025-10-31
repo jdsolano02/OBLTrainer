@@ -348,7 +348,12 @@ function optimize(scramble) {
                         // -1 cuz it starts&ends with slice
                         // we at the end; not at the beginning
                         if (changesAlignment(optimTo.pop().split(",")[0])) {
-                            moves.at(-1) = moves.at(-1) === "a" ? "A" : "a";
+                            try {
+                            moves.at(-1) = moves.at(-1) === "a" ? "A" : "a";}
+                            catch (error) {
+                                console.error(error);
+                                console.log(moves)
+                            }
                         }
                         // else no change
                         // now we add the first move to the previous move
@@ -608,7 +613,6 @@ let otherKeyPressed = 0;
 const startDelay = 0;
 
 let currentCase = "";
-let previousCase = "";
 
 // HTML elements
 
@@ -879,7 +883,6 @@ function generateScramble() {
     let caseNum = randInt(0, remainingOBL.length - 1);
     OBLChoice = remainingOBL.splice(caseNum, 1);
 
-    previousCase = currentCase
     currentCase = OBLChoice
 
     OBLChoice = OBLtranslation[OBLChoice];
@@ -906,10 +909,10 @@ function generateScramble() {
         (start.join(",") + 
             scramble[0].slice(1, -1) + 
             end.join(",")).replaceAll("/", " / "),
-        (start.join("") + 
+        start.join("") + 
             scramble[1].slice(1, -1) + 
-            end.join("")).replaceAll("/", " / "),
-        OBLChoice
+            end.join(""),
+        currentCase
     ];
 
     if (scrambleList.length != 0) {
@@ -924,6 +927,18 @@ function generateScramble() {
     currentScrambleEl.textContent = final[usingKarn];
     scrambleList.push(final);
     hasActiveScramble = true;
+}
+
+function displayPrevScram() {
+    if (scrambleList.at(-2-scrambleOffset) !== undefined) {
+        // we have a prev scram to display
+        previousScrambleEl.textContent = "Previous scramble : " + 
+            scrambleList.at(-2-scrambleOffset)[usingKarn] + " ("
+            scrambleList.at(-2-scrambleOffset)[2] + ")";
+    }
+    else {
+        previousScrambleEl.textContent = "Last scramble will show up here"
+    }
 }
 
 function showAll() {
@@ -1141,6 +1156,7 @@ function canInteractTimer() {
 }
 
 function enableGoEachCase(count) {
+    console.log("starting a new cycle! selectedOBL: " + selectedOBL)
     eachCase = count;
     remainingOBL = selectedOBL.flatMap((el) => Array(eachCase).fill(el));
 }
@@ -1219,12 +1235,7 @@ prevScrambleButton.addEventListener("click", () => {
     scrambleOffset = Math.min(scrambleOffset + 1, scrambleList.length - 1);
     currentScrambleEl.textContent =
         scrambleList.at(-1-scrambleOffset)[usingKarn];
-    if (scrambleList.at(-2-scrambleOffset) !== undefined) {
-        // we have a prev scram to display
-        previousScrambleEl.textContent = "Previous scramble : " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn] +
-            scrambleList.at(-2-scrambleOffset)[2];
-    }
+    displayPrevScram()
 });
 
 nextScrambleButton.addEventListener("click", () => {
@@ -1232,14 +1243,12 @@ nextScrambleButton.addEventListener("click", () => {
     if (scrambleList.length == 0) return;
     scrambleOffset--;
     if (scrambleOffset < 0) {
-        scrambleOffset = 0;
+        // scrambleOffset = 0;: this is already set in the function below
         generateScramble();
     } else {
         currentScrambleEl.textContent =
             scrambleList.at(-1-scrambleOffset)[usingKarn];
-        previousScrambleEl.textContent = "Previous scramble : " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn] +
-            scrambleList.at(-2-scrambleOffset)[2];
+        displayPrevScram()
     }
 });
 
@@ -1423,22 +1432,17 @@ eachCaseEl.addEventListener("change", (e) => {
 });
 
 removeLastEl.addEventListener("click", () => {
-    if (previousCase != "") {
-        deselectOBL(previousCase)
-        // TODO: if no o bl left, not working
-    }
+    if (scrambleList.at(-2-scrambleOffset) !== undefined) {
+         displayPrevScram
+        deselectOBL(scrambleList.at(-2-scrambleOffset)[2])
     saveSelectedOBL();
+    }
 })
 
 karnEl.addEventListener("change", (e) => {
     usingKarn ^= 1; // switches between 0 and 1 with XOR
     currentScrambleEl.textContent = scrambleList.at(-1-scrambleOffset)[usingKarn];
-    if (scrambleList.at(-2-scrambleOffset) !== undefined) {
-        // we have a prev scram to display
-        previousScrambleEl.textContent = "Previous scramble : " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn] +
-            scrambleList.at(-2-scrambleOffset)[2];
-    }
+    displayPrevScram()
 });
 
 // Enable crosses
