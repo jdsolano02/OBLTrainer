@@ -883,9 +883,10 @@ function generateScramble() {
         enableGoEachCase(number);
     }
     let caseNum = randInt(0, remainingOBL.length - 1);
-    OBLChoice = remainingOBL.splice(caseNum, 1);
+    OBLChoice = remainingOBL.splice(caseNum, 1)[0]; // OBLChoice: "good knight/axe"
 
-    currentCase = OBLChoice
+    currentCase = OBLChoice;
+    console.log("line 889: currentCase: " + currentCase);
 
     OBLChoice = OBLtranslation[OBLChoice];
     OBLChoice = OBLChoice[randInt(0, OBLChoice.length - 1)];
