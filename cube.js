@@ -909,13 +909,14 @@ function generateScramble() {
         (start.join("") + 
             scramble[1].slice(1, -1) + 
             end.join("")).replaceAll("/", " / "),
+        OBLChoice
     ];
 
     if (scrambleList.length != 0) {
-        previousScramble = scrambleList.at(-1)[usingKarn];
+        previousScramble = scrambleList.at(-1)[usingKarn] + 
+                        scrambleList.at(-1)[2]; // add the case name at the end
         previousScrambleEl.innerHTML =
-            "Previous scramble: " + previousScramble + 
-            ' <span style="white-space: nowrap;">( ' + previousCase + ' )</span>';
+            "Previous scramble: " + previousScramble;
     }
     if (!hasActiveScramble) {
         timerEl.textContent = "0.00";
@@ -951,6 +952,7 @@ function selectOBL(obl) {
 }
 
 function deselectOBL(obl) {
+    console.log("deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL)
     document.getElementById(obl).classList.remove("checked");
     if (selectedOBL.includes(obl)) {
         selectedOBL = selectedOBL.filter((a) => a != obl);
@@ -1220,7 +1222,8 @@ prevScrambleButton.addEventListener("click", () => {
     if (scrambleList.at(-2-scrambleOffset) !== undefined) {
         // we have a prev scram to display
         previousScrambleEl.textContent = "Previous scramble : " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn];
+            scrambleList.at(-2-scrambleOffset)[usingKarn] +
+            scrambleList.at(-2-scrambleOffset)[2];
     }
 });
 
@@ -1235,7 +1238,8 @@ nextScrambleButton.addEventListener("click", () => {
         currentScrambleEl.textContent =
             scrambleList.at(-1-scrambleOffset)[usingKarn];
         previousScrambleEl.textContent = "Previous scramble : " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn];
+            scrambleList.at(-2-scrambleOffset)[usingKarn] +
+            scrambleList.at(-2-scrambleOffset)[2];
     }
 });
 
@@ -1432,7 +1436,8 @@ karnEl.addEventListener("change", (e) => {
     if (scrambleList.at(-2-scrambleOffset) !== undefined) {
         // we have a prev scram to display
         previousScrambleEl.textContent = "Previous scramble : " + 
-        scrambleList.at(-2-scrambleOffset)[usingKarn];
+            scrambleList.at(-2-scrambleOffset)[usingKarn] +
+            scrambleList.at(-2-scrambleOffset)[2];
     }
 });
 
