@@ -670,6 +670,7 @@ function usingTimer() {
 }
 
 function OBLname(obl) {
+    // obl in an array, gives english
     return obl[0] ? `${obl[0]} ${obl[1]}/${obl[2]}` : `${obl[1]}/${obl[2]}`;
 }
 
@@ -914,7 +915,7 @@ function generateScramble() {
         previousScramble = scrambleList.at(-1)[usingKarn];
         previousScrambleEl.innerHTML =
             "Previous scramble: " + previousScramble + 
-            ' <span style="white-space: nowrap;">( ' + OBLname(previousCase) + ' )</span>';
+            ' <span style="white-space: nowrap;">( ' + previousCase + ' )</span>';
     }
     if (!hasActiveScramble) {
         timerEl.textContent = "0.00";
@@ -939,7 +940,7 @@ function showOBL(text) {
 }
 
 function selectOBL(obl) {
-    // obl is the id of the element
+    // obl is the id of the element, which is in english
     document.getElementById(obl).classList.add("checked");
     if (!selectedOBL.includes(obl)) {
         selectedOBL.push(obl);
