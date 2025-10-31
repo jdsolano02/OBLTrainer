@@ -349,7 +349,8 @@ function optimize(scramble) {
                         // we at the end; not at the beginning
                         if (changesAlignment(optimTo.pop().split(",")[0])) {
                             try {
-                            moves.at(-1) = moves.at(-1) === "a" ? "A" : "a";}
+                            moves.push(moves.pop() === "a" ? "A" : "a");
+                            console.log("line 353 ran successfully")}
                             catch (error) {
                                 console.error(error);
                                 console.log(moves)
@@ -688,6 +689,7 @@ function listLength(list) {
 
 function getLocalStorageData() {
     // selectedOBL
+    console.log("line 692 ran")
     const storageSelectedOBL = localStorage.getItem("selectedOBL");
     if (storageSelectedOBL !== null) {
         selectedOBL = JSON.parse(storageSelectedOBL);
@@ -916,10 +918,9 @@ function generateScramble() {
     ];
 
     if (scrambleList.length != 0) {
-        previousScramble = scrambleList.at(-1)[usingKarn] + 
-                        scrambleList.at(-1)[2]; // add the case name at the end
-        previousScrambleEl.innerHTML =
-            "Previous scramble: " + previousScramble;
+        previousScrambleEl.textContent = "Previous scramble: " + 
+            scrambleList.at(-1)[usingKarn] + " ("
+            scrambleList.at(-1)[2] + ")";
     }
     if (!hasActiveScramble) {
         timerEl.textContent = "0.00";
@@ -932,7 +933,7 @@ function generateScramble() {
 function displayPrevScram() {
     if (scrambleList.at(-2-scrambleOffset) !== undefined) {
         // we have a prev scram to display
-        previousScrambleEl.textContent = "Previous scramble : " + 
+        previousScrambleEl.textContent = "Previous scramble: " + 
             scrambleList.at(-2-scrambleOffset)[usingKarn] + " ("
             scrambleList.at(-2-scrambleOffset)[2] + ")";
     }
@@ -967,7 +968,11 @@ function selectOBL(obl) {
 }
 
 function deselectOBL(obl) {
-    console.log("deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL)
+    console.log("pre-deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL +
+        "\neachCase: "+eachCase+ "\nselectedOBL: "+selectedOBL+
+        "\nselectedOBL.includes(obl): " + selectedOBL.includes(obl) +
+        "\nremainingOBL.includes(obl): " + remainingOBL.includes(obl)
+    )
     document.getElementById(obl).classList.remove("checked");
     if (selectedOBL.includes(obl)) {
         selectedOBL = selectedOBL.filter((a) => a != obl);
@@ -975,6 +980,11 @@ function deselectOBL(obl) {
     if (eachCase && remainingOBL.includes(obl)) {
         remainingOBL = remainingOBL.filter((a) => a != obl);
     }
+    console.log("post-deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL +
+        "\neachCase: "+eachCase+ "\nselectedOBL: "+selectedOBL+
+        "\nselectedOBL.includes(obl): " + selectedOBL.includes(obl) +
+        "\nremainingOBL.includes(obl): " + remainingOBL.includes(obl)
+    )
 }
 
 function formatTime(ms) {
