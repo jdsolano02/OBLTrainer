@@ -1420,7 +1420,7 @@ eachCaseEl.addEventListener("change", (e) => {
 
 removeLastEl.addEventListener("click", () => {
     if (previousCase != "") {
-        deselectPBL(previousCase)
+        deselectOBL(previousCase)
     }
 })
 
