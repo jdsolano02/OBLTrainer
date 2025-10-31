@@ -864,6 +864,7 @@ function generateScramble() {
     if (selectedOBL.length === 0) {
         timerEl.textContent = "--:--";
         currentScrambleEl.textContent = "Scramble will show up here";
+        previousScrambleEl.textContent = "Last scramble will show up here";
         hasActiveScramble = false;
         scrambleList = [];
         return;
@@ -912,7 +913,7 @@ function generateScramble() {
 
     if (scrambleList.length != 0) {
         previousScrambleEl.textContent = "Previous scramble: " + 
-            scrambleList.at(-1)[usingKarn] + " ("
+            scrambleList.at(-1)[usingKarn] + " (" +
             scrambleList.at(-1)[2] + ")";
     }
     if (!hasActiveScramble) {
