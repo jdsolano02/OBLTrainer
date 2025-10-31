@@ -928,7 +928,7 @@ function displayPrevScram() {
     if (scrambleList.at(-2-scrambleOffset) !== undefined) {
         // we have a prev scram to display
         previousScrambleEl.textContent = "Previous scramble: " + 
-            scrambleList.at(-2-scrambleOffset)[usingKarn] + " ("
+            scrambleList.at(-2-scrambleOffset)[usingKarn] + " (" +
             scrambleList.at(-2-scrambleOffset)[2] + ")";
     }
     else {
