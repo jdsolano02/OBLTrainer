@@ -348,13 +348,7 @@ function optimize(scramble) {
                         // -1 cuz it starts&ends with slice
                         // we at the end; not at the beginning
                         if (changesAlignment(optimTo.pop().split(",")[0])) {
-                            try {
                             moves.push(moves.pop() === "a" ? "A" : "a");
-                            console.log("line 353 ran successfully")}
-                            catch (error) {
-                                console.error(error);
-                                console.log(moves)
-                            }
                         }
                         // else no change
                         // now we add the first move to the previous move
@@ -689,7 +683,6 @@ function listLength(list) {
 
 function getLocalStorageData() {
     // selectedOBL
-    console.log("line 692 ran")
     const storageSelectedOBL = localStorage.getItem("selectedOBL");
     if (storageSelectedOBL !== null) {
         selectedOBL = JSON.parse(storageSelectedOBL);
@@ -886,7 +879,6 @@ function generateScramble() {
     OBLChoice = remainingOBL.splice(caseNum, 1)[0]; // OBLChoice: "good knight/axe"
 
     currentCase = OBLChoice;
-    console.log("line 889: currentCase: " + currentCase);
 
     OBLChoice = OBLtranslation[OBLChoice];
     OBLChoice = OBLChoice[randInt(0, OBLChoice.length - 1)];
@@ -969,11 +961,6 @@ function selectOBL(obl) {
 }
 
 function deselectOBL(obl) {
-    console.log("pre-deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL +
-        "\neachCase: "+eachCase+ "\nselectedOBL: "+selectedOBL+
-        "\nselectedOBL.includes(obl): " + selectedOBL.includes(obl) +
-        "\nremainingOBL.includes(obl): " + remainingOBL.includes(obl)
-    )
     document.getElementById(obl).classList.remove("checked");
     if (selectedOBL.includes(obl)) {
         selectedOBL = selectedOBL.filter((a) => a != obl);
@@ -981,11 +968,6 @@ function deselectOBL(obl) {
     if (eachCase && remainingOBL.includes(obl)) {
         remainingOBL = remainingOBL.filter((a) => a != obl);
     }
-    console.log("post-deselecting OBL: "+ obl + "\nremaining: "+ remainingOBL +
-        "\neachCase: "+eachCase+ "\nselectedOBL: "+selectedOBL+
-        "\nselectedOBL.includes(obl): " + selectedOBL.includes(obl) +
-        "\nremainingOBL.includes(obl): " + remainingOBL.includes(obl)
-    )
 }
 
 function formatTime(ms) {
@@ -1167,7 +1149,6 @@ function canInteractTimer() {
 }
 
 function enableGoEachCase(count) {
-    console.log("starting a new cycle! selectedOBL: " + selectedOBL)
     eachCase = count;
     remainingOBL = selectedOBL.flatMap((el) => Array(eachCase).fill(el));
 }
