@@ -1421,7 +1421,9 @@ eachCaseEl.addEventListener("change", (e) => {
 removeLastEl.addEventListener("click", () => {
     if (previousCase != "") {
         deselectOBL(previousCase)
+        // TODO: if no o bl left, not working
     }
+    saveSelectedOBL();
 })
 
 karnEl.addEventListener("change", (e) => {
