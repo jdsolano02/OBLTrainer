@@ -147,7 +147,7 @@ input[type="checkbox"] {
 .filter-input:focus,
 .case:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #4c6dff;
+    box-shadow: 0 0 0 2px #a5f2f8;
 }
 
 .selection-grid {
