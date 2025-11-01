@@ -187,7 +187,11 @@ const OPTIM = {
     "/2,2/-2,-2/": "2,2/-2,-2",
     "/-2,-2/2,2/": "-2,-2/2,2",
     "/1,1/-1,-1/": "1,1/-1,-1",
-    "/-1,-1/1,1/": "-1,-1/1,1"
+    "/-1,-1/1,1/": "-1,-1/1,1",
+    "/2,-4/-2,4/2,-4/": "2,-4/-2,4/2,-4",
+    "/-2,4/2,-4/-2,4/": "-2,4/2,-4/-2,4",
+    "/5,-1/-5,1/5,-1/": "5,-1/-5,1/5,-1",
+    "/-5,1/5,-1/-5,1/": "-5,1/5,-1/-5,1"
 }
 
 const OPTIM_KEYS = Array.from(Object.keys(OPTIM)); // array of keys
@@ -1442,6 +1446,7 @@ karnEl.addEventListener("change", (e) => {
 for (let cross of document.querySelectorAll(".cross")) {
     cross.addEventListener("click", () => closePopup());
 }
+
 
 
 
