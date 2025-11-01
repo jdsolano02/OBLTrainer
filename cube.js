@@ -864,6 +864,13 @@ function passesFilter(obl, filter) {
 }
 
 function generateScramble() {
+    if (scrambleOffset > 0) {
+        // user probably timed one of the prev scrams
+        scrambleOffset--;
+        displayPrevScram();
+        currentScrambleEl.textContent = scrambleList.at(-1-scrambleOffset)[usingKarn];
+        return;
+    }
     scrambleOffset = 0;
     if (selectedOBL.length === 0) {
         timerEl.textContent = "--:--";
@@ -1002,7 +1009,7 @@ function stopTimer() {
     isRunning = false;
 }
 
-function resetTimer() {
+function resetTimer(hidden) {
     stopTimer();
     pressStartTime = null;
     holdTimeout = null;
@@ -1010,9 +1017,10 @@ function resetTimer() {
     intervalId = null;
     readyToStart = false;
     otherKeyPressed = 0;
-    if (canInteractTimer()) {
+    if (canInteractTimer() && !hidden) {
         timerEl.textContent = "0.00";
-    } else {
+    }
+    else if (!hidden) {
         timerEl.textContent = "--:--";
     }
     setColor("");
@@ -1339,7 +1347,7 @@ window.addEventListener("keydown", (e) => {
             closePopup();
         }
         if (usingTimer()) {
-            resetTimer();
+            resetTimer(false);
         }
         return;
     }
@@ -1359,7 +1367,7 @@ window.addEventListener("keyup", (e) => {
 
 document.addEventListener("visibilitychange", () => {
     if (document.visibilityState == "hidden") {
-        resetTimer();
+        resetTimer(true);
     }
 });
 
