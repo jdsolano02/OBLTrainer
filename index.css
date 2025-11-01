@@ -205,7 +205,8 @@ button:hover {
     font-size: 1.6rem;
     font-weight: bold;
     color: #e0e0e0;
-    cursor: pointer;
+    cursor: text;
+    user-select: text;
 }
 
 .bottom-bar .bar-scramble {
