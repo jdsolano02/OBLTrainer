@@ -332,9 +332,9 @@ function optimize(scramble) {
                 if (scramble.length - 1-i < optimable.length) continue;
                 if (scramble.slice(i, i+optimable.length) === optimable) {
                     // match!!
-                    let optimableSlice = optimable.split("/");
+                    let optimableLen = optimable.split("/").length;
                     let optimTo = OPTIM[optimable].split("/"); // no slice at beginning/end
-                    let delSliceNum = optimableSlice.length - optimTo.length;
+                    let delSliceNum = optimableLen - optimTo.length;
                     if (atSlice === 1) {
                         // we at the beginning; not at the end
                         if (changesAlignment(optimTo.shift().split(",")[0])) {
@@ -342,9 +342,9 @@ function optimize(scramble) {
                         }
                         // else no change
                         // now we add the end move to the next move
-                        moves[atSlice+optimableSlice.length-2] = addMoves(moves[atSlice+optimableSlice.length-2], optimTo.pop());
+                        moves[atSlice+optimableLen-2] = addMoves(moves[atSlice+optimableLen-2], optimTo.pop());
                     }
-                    else if (atSlice + optimableSlice.length -1 === moves.length) {
+                    else if (atSlice + optimableLen -1 === moves.length) {
                         // -1 cuz it starts&ends with slice
                         // we at the end; not at the beginning
                         if (changesAlignment(optimTo.pop().split(",")[0])) {
@@ -356,7 +356,7 @@ function optimize(scramble) {
                     }
                     else {
                         moves[atSlice-1] = addMoves(moves[atSlice-1], optimTo.shift());
-                        moves[atSlice+optimableSlice.length-2] = addMoves(moves[atSlice+optimableSlice.length-2], optimTo.pop());
+                        moves[atSlice+optimableLen-2] = addMoves(moves[atSlice+optimableLen-2], optimTo.pop());
                     }
                     // now optimTo has the two merged moves removed
                     moves.splice(atSlice, delSliceNum, ...optimTo);
@@ -1442,6 +1442,7 @@ karnEl.addEventListener("change", (e) => {
 for (let cross of document.querySelectorAll(".cross")) {
     cross.addEventListener("click", () => closePopup());
 }
+
 
 
 
