@@ -196,11 +196,12 @@ const OPTIM = {
 
 const OPTIM_KEYS = Array.from(Object.keys(OPTIM)); // array of keys
 
-function isOBL(layer, target) {
+function isOBL(layer, obl) {
     // layer: 12-char string w/ BbWw, in cs
-    // obl: a value of OBL dict
+    // obl: a key of OBL dict
     // return: bool
     // if it's top misalign, change to bottom misalign
+    let target = OBL[obl]
     if (layer.charAt(0).toUpperCase() !== layer.charAt(0)) layer = shift(layer,-1);
     for (let move = 0; move <= 3; move++) {
         if (target === shift(layer, 3*move)) return true;
@@ -380,8 +381,6 @@ function getScramble(obl) {
     let abf;
     let topA; // bool: top misalign?
     let [u, d] = obl.split("/");
-    u = OBL[u];
-    d = OBL[d];
     let state;
     while (true) {
         if (Math.random() < 0.5) {
@@ -1479,6 +1478,7 @@ karnEl.addEventListener("change", (e) => {
 for (let cross of document.querySelectorAll(".cross")) {
     cross.addEventListener("click", () => closePopup());
 }
+
 
 
 
