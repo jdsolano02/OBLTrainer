@@ -1,6 +1,6 @@
 # Upgraded OBL Trainer
 
-OBL TRAINER forked from the one made by @this_is_not_matt
+OBL TRAINER forked from the one made by discord user: @this_is_not_matt
 
 ## New Architecture Features
 
@@ -51,3 +51,4 @@ Access at : https://mattttttttttttttttttttttttttttttt.github.io/OBLTrainer/
 This trainer uses random walk to generate scrambles.
 
 **END OLD README**
+
