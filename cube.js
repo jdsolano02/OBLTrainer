@@ -1312,7 +1312,10 @@ overwriteListEl.addEventListener("click", () => {
         alert("Please click on a list");
         return;
     }
-    else if (Object.keys(defaultLists).includes(highlightedList)) return;
+    else if (Object.keys(defaultLists).includes(highlightedList)) {
+        alert("You cannot overwrite a default list")
+        return;
+    }
     if (selectedOBL.length == 0) {
         alert("Please select OBLs to create a list!");
         return;
@@ -1358,6 +1361,7 @@ deleteListEl.addEventListener("click", () => {
         return;
     }
     if (Object.keys(defaultLists).includes(highlightedList)) {
+        alert("You cannot overwrite a default list")
         return;
     }
     alert("Error");
