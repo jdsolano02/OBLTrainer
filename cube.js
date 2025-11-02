@@ -656,10 +656,6 @@ const displayOBLname = document.getElementById("OBLname");
 
 const listPopupEl = document.getElementById("list-popup");
 
-// initialize canvas declared at the very top of the file
-canvas = document.getElementById("scram-canvas");
-ctx = canvas.getContext("2d");
-
 // Main page elements (scrambles and timer)
 const currentScrambleEl = document.getElementById("cur-scram");
 const previousScrambleEl = document.getElementById("prev-scram");
