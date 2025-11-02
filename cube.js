@@ -789,12 +789,7 @@ async function init() {
         })
         .catch((error) => console.error("Failed to fetch data:", error));
 
-    // deselect all and show all
     showAll();
-    for (let obl of possibleOBL) {
-        deselectOBL(OBLname(obl));
-    }
-    saveSelectedOBL();
 }
 
 function passesFilter(obl, filter) {
