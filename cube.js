@@ -645,6 +645,7 @@ const userListsEl = document.getElementById("userlists");
 const defaultListsEl = document.getElementById("defaultlists");
 const newListEl = document.getElementById("newlist");
 const deleteListEl = document.getElementById("dellist");
+const overwriteListEl = document.getElementById("overlist")
 const selectListEl = document.getElementById("sellist");
 const trainListEl = document.getElementById("trainlist");
 
@@ -1303,6 +1304,36 @@ newListEl.addEventListener("click", () => {
     }
     addUserLists();
     setHighlightedList(newListName);
+});
+
+overwriteListEl.addEventListener("click", () => {
+    if (usingTimer()) return;
+    if (highlightedList == null) {
+        alert("Please click on a list");
+        return;
+    }
+    else if (Object.keys(defaultLists).includes(highlightedList)) return;
+    if (selectedOBL.length == 0) {
+        alert("Please select OBLs to create a list!");
+        return;
+    }
+
+    // valid request
+    if (confirm("You are about to overwrite list " + highlightedList)) {
+        let newList = {};
+        for (obl of possibleOBL) {
+            const n = OBLname(obl);
+            if (selectedOBL.includes(n)) {
+                newList[n] = 1;
+            } else {
+                newList[n] = 0;
+            }
+            userLists[highlightedList] = newList;
+        }
+        addUserLists();
+        selectList(highlightedList, false);
+        closePopup();
+    }
 });
 
 selectListEl.addEventListener("click", () => {
