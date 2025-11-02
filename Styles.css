@@ -85,15 +85,15 @@ input[type="checkbox"] {
 }
 
 .obl-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  align-content: top;
-  gap: 0.5rem;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: top;
+    gap: 0.5rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .obl-grid::-webkit-scrollbar {
