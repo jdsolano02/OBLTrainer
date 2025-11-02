@@ -1,123 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <title>OBL Trainer</title>
-        <link rel="stylesheet" href="index.css" />
-        <script defer="defer" src="cube.js"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="caticon.ico">
-    </head>
-    <body>
-        <div class="navbar">
-            <div>
-                <button id="toggleui">Toggle selector</button>
-            </div>
-            <div>OBL TRAINER</div>
-            <div>
-                <button id="uploaddata">&#8593;</button>
-                <button id="downloaddata">&#8595;</button>
-            </div>
-            <input
-                type="file"
-                id="fileinput"
-                style="display: none"
-                accept=".json"
-            />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>OBL Trainer</title>
+
+    <link rel="stylesheet" href="index.css" />
+
+    <link rel="stylesheet" href="Styles.css" />
+    <script defer="defer" src="JavaScript/Constants.js"></script>
+    <script defer="defer" src="JavaScript/Utils.js"></script>
+    <script defer="defer" src="JavaScript/ScrambleLogic.js"></script>
+    <script defer="defer" src="JavaScript/App.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="icon.JPG" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div>
+        <button id="toggleui">Toggle selector</button>
+      </div>
+      <div>OBL TRAINER</div>
+      <div>
+        <button id="uploaddata">&#8593;</button>
+        <button id="downloaddata">&#8595;</button>
+      </div>
+      <input type="file" id="fileinput" style="display: none" accept=".json" />
+    </div>
+
+    <div class="main">
+      <div class="popup" id="list-popup">
+        <div class="popup-inner">
+          <div class="list-bar">
+            <div class="list-name">Manage lists</div>
+            <div class="cross">&#10005;</div>
+          </div>
+          <div class="list-menu" id="list-menu">
+            <div class="sublist-name">Default lists</div>
+            <div id="defaultlists" class="sublist-menu"></div>
+            <div class="sublist-name">Your lists</div>
+            <div id="userlists" class="sublist-menu"></div>
+          </div>
+          <div class="list-buttons">
+            <button class="list-btn" id="dellist">Delete</button>
+            <button class="list-btn right" id="overlist">Overwrite</button>
+            <button class="list-btn" id="sellist">View</button>
+            <button class="list-btn" id="trainlist">Train</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-bar">
+        <div class="bar-scramble" id="cur-scram">
+          Scramble will show up here
+        </div>
+        <div
+          class="bar-scramble"
+          id="prev-scram"
+          style="font-size: 1.3rem; color: #aaa; margin-top: 5px"
+        >
+          Last scramble will show up here
+        </div>
+        <div style="margin-top: 10px">
+          <button class="bar-btn" id="prev">&lt;- Previous</button>
+          <button class="bar-btn" id="unselprev">Remove last</button>
+          <button class="bar-btn" id="next">Next -&gt;</button>
+        </div>
+      </div>
+
+      <div class="main-columns">
+        <div class="sidebar full-width-mobile" id="sidebar">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="allcases" />
+            <span class="checkboxtext"><b>Go through each case once</b></span>
+          </div>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="karn" />
+            <span class="checkboxtext"><b>Use karnotation</b></span>
+          </div>
+          <input
+            type="text"
+            class="filter-input"
+            id="filter"
+            maxlength="18"
+            placeholder="Filter cases"
+          />
+          <div class="selection-grid">
+            <button class="selection-btn" id="sela">Select <b>ALL</b></button>
+            <button class="selection-btn" id="desela">
+              Deselect <b>ALL</b>
+            </button>
+            <button class="selection-btn" id="selt">Select these</button>
+            <button class="selection-btn" id="deselt">Deselect these</button>
+            <button class="selection-btn" id="showselected">
+              Show selected
+            </button>
+            <button class="selection-btn" id="showall">Show ALL</button>
+            <button class="selection-btn" id="openlists">Select list</button>
+            <button class="selection-btn" id="newlist">Create list</button>
+          </div>
+          <div class="obl-grid" id="results"></div>
         </div>
 
-        <div class="main">
-            <div class="popup" id="list-popup">
-                <div class="popup-inner">
-                    <div class="list-bar">
-                        <div class="list-name">Manage lists</div>
-                        <div class="cross">&#10005;</div>
-                    </div>
-                    <div class="list-menu" id="list-menu">
-                        <div class="sublist-name">Default lists</div>
-                        <div id="defaultlists" class="sublist-menu"></div>
-                        <div class="sublist-name">Your lists</div>
-                        <div id="userlists" class="sublist-menu"></div>
-                    </div>
-                    <div class="list-buttons">
-                        <button class="list-btn" id="dellist">Delete</button>
-                        <button class="list-btn right" id="overlist">Overwrite</button>
-                        <button class="list-btn" id="sellist">View</button>
-                        <button class="list-btn" id="trainlist">Train</button>
-                    </div>
-                </div>
+        <div class="content hidden-mobile" id="content">
+          <div class="content-body">
+            <div class="timer-box" id="timerbox">
+              <div class="timer-display" id="timer">--:--</div>
             </div>
 
-            <div class="sidebar full-width-mobile" id="sidebar">
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="allcases">
-                    <span class="checkboxtext"><b>Go through each case once</b></span>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="karn">
-                    <span class="checkboxtext"><b>Use karnotation</b></span>
-                </div>
-                <input
-                type="text"
-                class="filter-input"
-                id="filter"
-                maxlength="18"
-                placeholder="Filter cases"
-                />
-                <div class="selection-grid">
-                    <button class="selection-btn" id="sela">
-                        Select <b>ALL</b>
-                    </button>
-                    <button class="selection-btn" id="desela">
-                        Deselect <b>ALL</b>
-                    </button>
-                    <button class="selection-btn" id="selt">
-                        Select these
-                    </button>
-                    <button class="selection-btn" id="deselt">
-                        Deselect these
-                    </button>
-                    <button class="selection-btn" id="showselected">
-                        Show selected
-                    </button>
-                    <button class="selection-btn" id="showall">Show ALL</button>
-                    <button class="selection-btn" id="openlists">
-                        Select list
-                    </button>
-                    <button class="selection-btn" id="newlist">
-                        Create list
-                    </button>
-                </div>
-                <div class="obl-grid" id="results">
-                    <!-- Cases -->
-                </div>
+            <div class="times-list-container">
+              <div class="times-list-header">
+                <span>Solves: <span id="total-solves-count">0</span></span>
+                <a href="#" id="clear-times-link">(clear)</a>
+              </div>
+              <div class="times-list-content" id="times-list-content"></div>
             </div>
-
-            <div class="content hidden-mobile" id="content">
-                <div class="top-bar">
-                    <div class="bar-scramble" id="cur-scram">
-                        Scramble will show up here
-                    </div>
-                    <div style="margin-top: 10px">
-                        <button class="bar-btn" id="prev"><- Previous</button>
-                        <button class="bar-btn" id="unselprev">Remove last</button>
-                        <button class="bar-btn" id="next">Next -></button>
-                    </div>
-                </div>
-
-                <div class="timer-box" id="timerbox">
-                    <div class="timer-display" id="timer">--:--</div>
-                </div>
-
-                <div class="bottom-bar">
-                    <div class="bar-scramble" id="prev-scram">
-                        Last scramble will show up here
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>
