@@ -650,7 +650,6 @@ const selectListEl = document.getElementById("sellist");
 const trainListEl = document.getElementById("trainlist");
 
 // Popup
-const scramblePopupEl = document.getElementById("scram-popup");
 const displayScramEl = document.getElementById("display-scram");
 const canvasWrapperEl = document.getElementById("canvas-wrapper");
 const displayOBLname = document.getElementById("OBLname");
@@ -1150,7 +1149,6 @@ function openListPopup() {
 
 function closePopup() {
     isPopupOpen = false;
-    scramblePopupEl.classList.remove("open");
     listPopupEl.classList.remove("open");
 }
 
@@ -1335,6 +1333,7 @@ overwriteListEl.addEventListener("click", () => {
         }
         addUserLists();
         selectList(highlightedList, false);
+        highlightedList = null;
         closePopup();
     }
 });
