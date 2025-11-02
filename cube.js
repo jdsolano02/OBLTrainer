@@ -789,7 +789,6 @@ async function init() {
         })
         .catch((error) => console.error("Failed to fetch data:", error));
 
-    showAll();
 }
 
 function passesFilter(obl, filter) {
