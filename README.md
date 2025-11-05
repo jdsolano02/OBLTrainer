@@ -25,11 +25,13 @@ OBL TRAINER forked from the one made by discord user: @this_is_not_matt
 - A new "Solves" panel has been added, creating a 3-column layout (Cases | Timer | Solves).
 - This list dynamically updates after every solve, showing your complete history.
 - It displays the total solve count and a running average (avg) for each case.
+- At-a-glance Summary: A new panel shows your overall best and worst performing cases (based on average time), highlighted in gold and red.
 
 ### Visual Feedback
 
-- To provide instant feedback, the list now highlights your best solve in gold and your worst solve in red for each case.
-- The main timer column is now wider than the two sidebars to give it visual priority.
+-Per-Solve: In the solves list, your single best time for a case is highlighted in **gold**, and your worst in **red**.
+-Layout: The main timer column is wider than the two sidebars to give it visual priority.
+-Responsive Design: The layout now correctly adapts to mobile devices, including a functional "Toggle selector" button and appropriate scrolling for all panels.
 
 ### Data Management
 
@@ -51,4 +53,3 @@ Access at : https://mattttttttttttttttttttttttttttttt.github.io/OBLTrainer/
 This trainer uses random walk to generate scrambles.
 
 **END OLD README**
-
