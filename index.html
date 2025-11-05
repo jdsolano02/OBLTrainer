@@ -88,16 +88,16 @@
             placeholder="Filter cases"
           />
           <div class="selection-grid">
-            <button class="selection-btn" id="sela">Select <b>ALL</b></button>
-            <button class="selection-btn" id="desela">
-              Deselect <b>ALL</b>
-            </button>
-            <button class="selection-btn" id="selt">Select these</button>
-            <button class="selection-btn" id="deselt">Deselect these</button>
+            <button class="selection-btn" id="showall">Show All</button>
             <button class="selection-btn" id="showselected">
-              Show selected
+              Show Selected
             </button>
-            <button class="selection-btn" id="showall">Show ALL</button>
+            <button class="selection-btn" id="sela">Select All</button>
+
+            <button class="selection-btn" id="desela">Deselect All</button>
+
+            <button class="selection-btn" id="selt">Select listed</button>
+            <button class="selection-btn" id="deselt">Deselect listed</button>
             <button class="selection-btn" id="openlists">Select list</button>
             <button class="selection-btn" id="newlist">Create list</button>
           </div>
@@ -114,6 +114,21 @@
               <div class="times-list-header">
                 <span>Solves: <span id="total-solves-count">0</span></span>
                 <a href="#" id="clear-times-link">(clear)</a>
+              </div>
+
+              <div class="summary-stats-container">
+                <div class="summary-stat" id="best-case-stat">
+                  🏆 Best: <strong id="best-case-name">N/A</strong> (<span
+                    id="best-case-avg"
+                    >0.00s</span
+                  >)
+                </div>
+                <div class="summary-stat" id="worst-case-stat">
+                  🐌 Worst: <strong id="worst-case-name">N/A</strong> (<span
+                    id="worst-case-avg"
+                    >0.00s</span
+                  >)
+                </div>
               </div>
               <div class="times-list-content" id="times-list-content"></div>
             </div>

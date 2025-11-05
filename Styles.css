@@ -418,6 +418,7 @@ button:hover {
   font-size: 1.1rem;
   font-weight: bold;
   flex-shrink: 0;
+  padding: 0.5rem;
 }
 
 .times-list-header a {
@@ -481,6 +482,41 @@ button:hover {
   font-weight: bold;
 }
 
+/* --- ESTILOS PARA EL NUEVO FEATURE DE BEST/WORST CASE --- */
+
+.summary-stats-container {
+  padding: 8px 12px;
+  /* Crea una separación visual */
+  border-bottom: 2px solid #333;
+  background-color: #202020; /* Un fondo sutil */
+  flex-shrink: 0; /* Evita que se encoja */
+}
+
+.summary-stat {
+  font-size: 0.9rem;
+  color: #ccc;
+  padding: 2px 0;
+
+  /* Asegura que el texto no se desborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary-stat strong {
+  /* El nombre del caso */
+  color: #fff;
+  margin-left: 4px;
+}
+
+/* Colorea los textos "Best" y "Worst" */
+#best-case-stat {
+  color: #ffd700;
+}
+#worst-case-stat {
+  color: #ff4d4d;
+}
+
 /* --- RESPONSIVE DESIGN --- */
 @media screen and (max-width: 900px) {
   /* 1. Define las clases de helper que usa el JS */
@@ -530,7 +566,7 @@ button:hover {
     border-right: none;
     min-height: 200px;
     padding: 0.5rem;
-    flex: 1; /* El timer y la lista se reparten el espacio 50/50 en móvil */
+    flex: 1;
   }
 
   #timer {
@@ -539,10 +575,12 @@ button:hover {
 
   .times-list-container {
     border-top: 2px solid #333;
-    padding-left: 1rem; /* Alineado con el padding de .content */
+    padding-left: 1rem;
     padding-top: 0.5rem;
-    flex: 1; /* El timer y la lista se reparten el espacio 50/50 en móvil */
-    min-height: 250px; /* Altura mínima para la lista */
+    flex: 1;
+    min-height: 250px;
+    padding-top: 0;
+    padding-bottom: 1;
   }
 }
 

@@ -1,12 +1,11 @@
-// --- ESTADO DE LA APLICACIÓN ---
-let selectedOBL = []; // [oblid]
-let scrambleList = []; // [[normal, karn], etc.]
+let selectedOBL = [];
+let scrambleList = [];
 let remainingOBL = [];
-let eachCase = 0; // 0 = random, n = get each case n times before moving on
-let usingKarn = 0; // 0 = not using karn, etc.
+let eachCase = 0;
+let usingKarn = 0;
 let defaultLists = {};
 let userLists = {};
-let solveTimes = {}; // Objeto para mantener los tiempos en memoria
+let solveTimes = {};
 let highlightedList = null;
 let scrambleOffset = 0;
 let hasActiveScramble = false;
@@ -71,6 +70,11 @@ const timesListContentEl = document.getElementById("times-list-content");
 const totalSolvesCountEl = document.getElementById("total-solves-count");
 const clearTimesLinkEl = document.getElementById("clear-times-link");
 
+const bestCaseNameEl = document.getElementById("best-case-name");
+const bestCaseAvgEl = document.getElementById("best-case-avg");
+const worstCaseNameEl = document.getElementById("worst-case-name");
+const worstCaseAvgEl = document.getElementById("worst-case-avg");
+
 // --- LÓGICA DE ALMACENAMIENTO ---
 function getLocalStorageData() {
   // selectedOBL
@@ -111,6 +115,7 @@ function getLocalStorageData() {
     solveTimes = {};
   }
   renderSolveTimesList();
+  updateBestWorstStats();
 }
 
 function saveSelectedOBL() {
@@ -403,6 +408,45 @@ function renderSolveTimesList() {
   totalSolvesCountEl.textContent = totalSolves;
 }
 
+function updateBestWorstStats() {
+  let bestAvg = Infinity;
+  let worstAvg = 0;
+  let bestCase = "N/A";
+  let worstCase = "N/A";
+
+  const caseNames = Object.keys(solveTimes);
+
+  if (caseNames.length === 0) {
+    bestCaseNameEl.textContent = "N/A";
+    bestCaseAvgEl.textContent = "0.00s";
+    worstCaseNameEl.textContent = "N/A";
+    worstCaseAvgEl.textContent = "0.00s";
+    return;
+  }
+
+  for (const caseName of caseNames) {
+    const times = solveTimes[caseName];
+    if (!times || times.length === 0) continue;
+
+    const sum = times.reduce((a, b) => a + b, 0);
+    const avg = sum / times.length;
+
+    if (avg < bestAvg) {
+      bestAvg = avg;
+      bestCase = caseName;
+    }
+    if (avg > worstAvg) {
+      worstAvg = avg;
+      worstCase = caseName;
+    }
+  }
+
+  bestCaseNameEl.textContent = bestCase;
+  bestCaseAvgEl.textContent = `avg: ${bestAvg.toFixed(2)}s`;
+  worstCaseNameEl.textContent = worstCase;
+  worstCaseAvgEl.textContent = ` avg: ${worstAvg.toFixed(2)}s`;
+}
+
 function usingTimer() {
   return isRunning || pressStartTime != null;
 }
@@ -462,6 +506,7 @@ function timerBeginTouch(spaceEquivalent) {
       solveTimes[solvedCase].push(solveTime);
       saveSolveTimes();
       renderSolveTimesList();
+      updateBestWorstStats();
     }
 
     generateScramble();
@@ -582,6 +627,7 @@ function clearAllTimes() {
     solveTimes = {};
     saveSolveTimes();
     renderSolveTimesList();
+    updateBestWorstStats();
     alert("All solve times have been cleared.");
   }
 }
