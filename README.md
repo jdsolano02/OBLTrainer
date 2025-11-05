@@ -16,22 +16,21 @@ OBL TRAINER forked from the one made by discord user: @this_is_not_matt
 
 ## New QOL Features
 
-- Solve Persistence: All solves are now automatically saved to the browser's localStorage. This means your times are saved even if you close the tab or restart your computer.
-- Per-Case Tracking: Times are saved and associated with the specific OBL case you solved (e.g. cadj/cadj).
-- An average is displayed for each case.
+-Solve Persistence: All solves are automatically saved to the browser's `localStorage`. This means your times are saved even if you close the tab or restart your computer.
+-Per-Case Tracking: Times are saved and associated with the specific OBL case you solved (e.g. `cadj/cadj`).
 
 ### Dynamic Solves List
 
-- A new "Solves" panel has been added, creating a 3-column layout (Cases | Timer | Solves).
-- This list dynamically updates after every solve, showing your complete history.
-- It displays the total solve count and a running average (avg) for each case.
-- At-a-glance Summary: A new panel shows your overall best and worst performing cases (based on average time), highlighted in gold and red.
+- A new "Solves" panel creates a 3-column layout: **Cases | Timer | Solves**.
+- At-a-glance Summary:A new panel shows your overall best and worst performing cases (based on average time), highlighted in gold and red.
+- Detailed History: The list dynamically updates after every solve, showing your complete solve history.
+- Per-Case Stats: The list displays the total solve count and a running average (avg) for each individual case.
 
 ### Visual Feedback
 
--Per-Solve: In the solves list, your single best time for a case is highlighted in **gold**, and your worst in **red**.
--Layout: The main timer column is wider than the two sidebars to give it visual priority.
--Responsive Design: The layout now correctly adapts to mobile devices, including a functional "Toggle selector" button and appropriate scrolling for all panels.
+- Per-Solve: In the solves list, your single best time for a case is highlighted in **gold**, and your worst in **red**.
+- Layout: The main timer column is wider than the two sidebars to give it visual priority.
+- Responsive Design: The layout now correctly adapts to mobile devices, including a functional "Toggle selector" button and appropriate scrolling for all panels.
 
 ### Data Management
 
