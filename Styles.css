@@ -14,16 +14,19 @@ body {
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* -khtml-user-select: none; <-- Eliminado (obsoleto) */
 }
 
 * {
   touch-action: pan-y !important;
+  box-sizing: border-box;
 }
 
 .navbar {
   background-color: #1f1f1f;
   color: #ffffff;
   padding: 0.5rem;
+  /* text-align: top; <-- Eliminado (inválido) */
   font-size: 1.2rem;
   border-bottom: 2px solid #333;
   display: flex;
@@ -63,7 +66,7 @@ input[type="checkbox"] {
 }
 
 .sidebar {
-  width: 26%;
+  width: 26%; /* Se mantiene tu ancho de 26% */
   border-right: 2px solid #333;
   padding: 1rem;
   box-sizing: border-box;
@@ -83,19 +86,33 @@ input[type="checkbox"] {
 }
 
 .obl-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-content:start;
-    gap: 0.5rem;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: start;
+  gap: 0.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .obl-grid::-webkit-scrollbar {
   display: none;
+}
+.case {
+  border: 3px solid #666;
+  font-weight: bold;
+  min-width: 140px;
+  height: 45px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #262626;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .case {
@@ -133,7 +150,7 @@ input[type="checkbox"] {
 
 .content {
   flex: 1;
-  padding: 0; /* CAMBIO: El padding ahora está en los hijos */
+  padding: 0;
   background-color: #181818;
   color: #e0e0e0;
   display: flex;
@@ -177,16 +194,15 @@ button:hover {
   border-color: #a5f2f8;
 }
 
-/* CAMBIO: top-bar ahora tiene su propio padding */
 .top-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem; /* AÑADIDO */
+  padding: 1rem;
   padding-bottom: 20px;
   border-bottom: 2px solid #333;
   flex-shrink: 0;
-  background-color: #181818; /* AÑADIDO: Mismo fondo que el content */
+  background-color: #181818;
 }
 
 .bar-btn {
@@ -216,14 +232,14 @@ button:hover {
 }
 
 .timer-box {
-  flex: 2.5;
+  flex: 2.5; /* Se mantiene tu proporción de 2.5 */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 150px;
   border-right: 2px solid #333;
-  padding: 1rem; /* AÑADIDO: padding interno */
-  box-sizing: border-box; /* AÑADIDO */
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .timer-display {
@@ -307,12 +323,6 @@ button:hover {
   text-align: center;
 }
 
-.scram-canvas {
-  background-color: #00000000;
-  left: 0;
-  top: 0;
-}
-
 #canvas-wrapper {
   width: 100%;
   flex: 1 1 auto;
@@ -390,14 +400,14 @@ button:hover {
 }
 
 .times-list-container {
-  flex: 1;
+  flex: 1; /* Se mantiene tu proporción */
   display: flex;
   flex-direction: column;
   border-top: none;
   margin-top: 0;
-  padding: 1rem; /* AÑADIDO: padding interno */
+  padding: 1rem;
   padding-left: 0.5rem;
-  box-sizing: border-box; /* AÑADIDO */
+  box-sizing: border-box;
 }
 
 .times-list-header {
@@ -462,58 +472,6 @@ button:hover {
   line-height: 1.4;
 }
 
-@media screen and (max-width: 800px) {
-  .popup-inner {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .sidebar {
-    width: 35%;
-  }
-
-  .hidden-mobile {
-    visibility: hidden;
-    width: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  .full-width-mobile {
-    width: 100%;
-    border: 0;
-  }
-
-  .selection-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .main-columns {
-    flex-direction: column;
-  }
-  .timer-box {
-    border-right: none;
-  }
-  .times-list-container {
-    border-top: 2px solid #333;
-    padding-left: 0;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .selection-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 290px) {
-  .selection-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 .time-entry-alltimes .time-best {
   color: #ffd700;
   font-weight: bold;
@@ -521,4 +479,83 @@ button:hover {
 .time-entry-alltimes .time-worst {
   color: #ff4d4d;
   font-weight: bold;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media screen and (max-width: 900px) {
+  /* 1. Define las clases de helper que usa el JS */
+  .hidden-mobile {
+    display: none !important;
+    width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .full-width-mobile {
+    width: 100% !important; /* Sobreescribe el width: 26% */
+    height: 100%; /* Ocupa toda la altura */
+    border-right: none;
+  }
+
+  /* 2. Permite que el .main-columns se desborde, para que el toggle funcione */
+  .main-columns {
+    overflow-x: hidden; /* Evita scroll horizontal */
+  }
+
+  /* 3. Ajusta el .sidebar (que ahora será .full-width-mobile) */
+  .sidebar {
+    width: 100%; /* Por defecto, ocupa todo el ancho */
+  }
+
+  .obl-grid {
+    /* La cuadrícula de casos ahora usa auto-fit en móvil */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .selection-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas para botones */
+  }
+
+  /* 4. Apila el timer y la lista de solves en el .content */
+  .content {
+    padding: 1rem; /* Añade padding de vuelta en móvil */
+    overflow-y: auto; /* Permite scroll del contenido si es necesario */
+  }
+
+  .content-body {
+    flex-direction: column;
+  }
+
+  .timer-box {
+    border-right: none;
+    min-height: 200px;
+    padding: 0.5rem;
+    flex: 1; /* El timer y la lista se reparten el espacio 50/50 en móvil */
+  }
+
+  #timer {
+    font-size: 7em;
+  }
+
+  .times-list-container {
+    border-top: 2px solid #333;
+    padding-left: 1rem; /* Alineado con el padding de .content */
+    padding-top: 0.5rem;
+    flex: 1; /* El timer y la lista se reparten el espacio 50/50 en móvil */
+    min-height: 250px; /* Altura mínima para la lista */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .selection-grid,
+  .full-width-mobile .selection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 290px) {
+  .selection-grid,
+  .full-width-mobile .selection-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

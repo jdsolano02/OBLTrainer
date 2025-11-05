@@ -8,8 +8,6 @@
     />
     <title>OBL Trainer</title>
 
-    <link rel="stylesheet" href="index.css" />
-
     <link rel="stylesheet" href="Styles.css" />
     <script defer="defer" src="JavaScript/Constants.js"></script>
     <script defer="defer" src="JavaScript/Utils.js"></script>
@@ -66,14 +64,14 @@
           Last scramble will show up here
         </div>
         <div style="margin-top: 10px">
-          <button class="bar-btn" id="prev">&lt;- Previous Scramble</button>
-          <button class="bar-btn" id="unselprev">Remove last case</button>
-          <button class="bar-btn" id="next">Next Scramble -&gt;</button>
+          <button class="bar-btn" id="prev">&lt;- Previous</button>
+          <button class="bar-btn" id="unselprev">Remove last</button>
+          <button class="bar-btn" id="next">Next -&gt;</button>
         </div>
       </div>
 
       <div class="main-columns">
-        <div class="sidebar full-width-mobile" id="sidebar">
+        <div class="sidebar" id="sidebar">
           <div class="checkbox-wrapper">
             <input type="checkbox" id="allcases" />
             <span class="checkboxtext"><b>Go through each case once</b></span>
@@ -106,7 +104,7 @@
           <div class="obl-grid" id="results"></div>
         </div>
 
-        <div class="content hidden-mobile" id="content">
+        <div class="content" id="content">
           <div class="content-body">
             <div class="timer-box" id="timerbox">
               <div class="timer-display" id="timer">--:--</div>
