@@ -1,54 +1,59 @@
-# Upgraded OBL Trainer
+# 🟦 Upgraded OBL Trainer
 
-OBL TRAINER forked from the one made by discord user: @this_is_not_matt
+A professional, modular, and feature-rich trainer for Square-1 **Orientation of Both Layers (OBL)**. 
 
-## New Architecture Features
-
-- This project was recently refactored to follow Clean Code and SOLID principles, moving away from a single "god file" (cube.js) to a modular, maintainable structure.
-- Single Responsibility Principle (SRP): The monolithic cube.js file was splitted, each with a single, clear responsibility and then deleted.
-
-## New Project Structure
-
-- All JavaScript has been moved into a dedicated `/JavaScript/` directory.
-- The Index.html structure was refactored to be more semantic and flexible.
-- The scramble bar (.top-bar) was moved out to span the full width of the main view.
-- The main content area (.main-columns) is now a CSS Flexbox container, allowing for a cleaner and more robust layout.
-
-## New QOL Features
-
--Solve Persistence: All solves are automatically saved to the browser's `localStorage`. This means your times are saved even if you close the tab or restart your computer.
--Per-Case Tracking: Times are saved and associated with the specific OBL case you solved (e.g. `cadj/cadj`).
-
-### Dynamic Solves List
-
-- A new "Solves" panel creates a 3-column layout: **Cases | Timer | Solves**.
-- At-a-glance Summary:A new panel shows your overall best and worst performing cases (based on average time), highlighted in gold and red.
-- Detailed History: The list dynamically updates after every solve, showing your complete solve history.
-- Per-Case Stats: The list displays the total solve count and a running average (avg) for each individual case.
-
-### Visual Feedback
-
-- Per-Solve: In the solves list, your single best time for a case is highlighted in **gold**, and your worst in **red**.
-- Layout: The main timer column is wider than the two sidebars to give it visual priority.
-- Responsive Design: The layout now correctly adapts to mobile devices, including a functional "Toggle selector" button and appropriate scrolling for all panels.
-
-### Data Management
-
-- A `(clear)` Button was added to the "Solves" panel, allowing you to easily and safely wipe all solve data from localStorage and start fresh.
+> **Credits:** This project is a major refactor and fork of the original trainer by Discord user `@this_is_not_matt`.
 
 ---
 
-> If you find a bug or have a suggestion, contact me on discord (@realxones)
+## 🛠 New Architecture & Refactoring
+
+This project was recently refactored to follow **Clean Code** and **SOLID** principles. We moved away from a monolithic "god file" (`cube.js`) to a modular, maintainable structure.
+
+* **Single Responsibility Principle (SRP):** The monolithic logic was split into dedicated modules, each with a single, clear responsibility.
+* **Modular Structure:** All logic is now organized within the `/JavaScript/` directory:
+    * `App.js`: Main coordinator and event entry point.
+    * `Timer.js`: Core timing logic.
+    * `Sidebar.js`: Grid building, filtering, and list management.
+    * `Scrambler.js`: Random walk scramble generation.
+    * `Solves.js`: Data persistence and statistics.
 
 ---
 
-### START OLD README
+## ✨ Key Features
 
-Creator Discord: @this_is_not_matt
-Access at : https://mattttttttttttttttttttttttttttttt.github.io/OBLTrainer/
+### 💾 Solve Persistence & Tracking
+* **LocalStorage Save:** Your sessions are automatically saved. Closing the tab or restarting your computer won't lose your progress.
+* **Per-Case Tracking:** Times are associated with specific OBL cases (e.g., `cadj/cadj`), allowing for targeted practice.
 
-**good thumb/bunny** is the one that F move to good pairs; **good axe/axe** are same axe/axe
+### 📊 Dynamic Statistics
+* **At-a-glance Summary:** A dedicated panel highlights your overall **Best** (Gold) and **Worst** (Red) performing cases based on running averages.
+* **Detailed History:** The solves list updates in real-time, showing total solve counts and individual case averages.
 
-This trainer uses random walk to generate scrambles.
+### 🎨 UI/UX & Visual Feedback
+* **Dark Neon Theme:** A modern, high-contrast interface using "Cyan Neon" accents for better focus.
+* **Responsive Design:** Optimized for both Desktop and Mobile. Includes a functional "Toggle Selector" and adaptive layouts.
+* **Improved Grid:** Expanded 8-column layout (desktop) with high-quality SVG assets.
 
-**END OLD README**
+### ⚙️ Advanced Settings (New!)
+* **SVG Migration:** (WIP) Moving from PNG to standardized SVG assets for crisp visuals at any zoom level. *Currently updated up to 4-Slicer cases.*
+
+---
+
+## 🛠 Data Management
+
+* **Backup:** Use the **Upload (↑)** and **Download (↓)** buttons to move your data between devices.
+* **Wipe:** Use the `(clear)` link in the Solves panel to reset your statistics and localStorage.
+
+---
+
+## 🤝 Support & Bug Reports
+
+If you find a bug or have a suggestion, contact me on Discord: **@realxones** (Jose Solano).
+
+---
+
+### 📜 Legacy Notes (Original README)
+* **Creator:** `@this_is_not_matt` (Original: [OBLTrainer](https://mattttttttttttttttttttttttttttttt.github.io/OBLTrainer/))
+* **Notes:** `good thumb/bunny` is the one where `F` move leads to `good pairs`; `good axe/axe` are same `axe/axe`.
+* **Logic:** Uses random walk for scramble generation.
