@@ -153,8 +153,6 @@ const Sidebar = (function () {
       trainerViewEl = elements.trainerViewEl;
     },
 
-    // Localización: JavaScript/Sidebar.js -> Función buildGrid
-
     buildGrid: function () {
       let html = "";
       for (const [groupName, cases] of Object.entries(OBL_GROUPS)) {
