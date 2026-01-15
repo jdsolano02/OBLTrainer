@@ -153,6 +153,8 @@ const Sidebar = (function () {
       trainerViewEl = elements.trainerViewEl;
     },
 
+    // Localización: JavaScript/Sidebar.js -> Función buildGrid
+
     buildGrid: function () {
       let html = "";
       for (const [groupName, cases] of Object.entries(OBL_GROUPS)) {
@@ -161,16 +163,32 @@ const Sidebar = (function () {
         html += `<div class="obl-grid-group">`;
         for (const obl of cases) {
           const caseName = OBLname(obl);
-          const fileName =
-            caseName.replace(/ /g, "_").replace(/\//g, "_") + ".svg"; // .svg
+
+          // --- CORRECCIÓN PARA EL SERVIDOR ---
+          // 1. Dividimos por espacios o barras diagonales
+          // 2. Ponemos la primera letra de cada palabra en Mayúscula
+          // 3. Unimos todo con guiones bajos
+          const formattedFileName = caseName
+            .split(/[\s\/]+/) // Divide por espacio o /
+            .map(
+              (word) =>
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            )
+            .join("_");
+
+          const fileName = formattedFileName + ".svg";
+          // -----------------------------------
+
           const imgSrc = `Images/OBL/${folderName}/${fileName}`;
+
           html += `
-            <div class="case" id="${caseName}" title="${caseName}">
-              <div class="puzzle-image-container">
-                <img src="${imgSrc}" alt="${caseName}" loading="lazy" />
-              </div>
-              <span class="case-name-text">${caseName}</span>
-            </div>`;
+        <div class="case" id="${caseName}" title="${caseName}">
+          <div class="puzzle-image-container">
+            <img src="${imgSrc}" alt="${caseName}" loading="lazy" 
+                 onerror="this.style.display='none'; console.error('No se encontró: ${imgSrc}');" />
+          </div>
+          <span class="case-name-text">${caseName}</span>
+        </div>`;
         }
         html += `</div>`;
       }
