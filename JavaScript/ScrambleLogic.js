@@ -1,3 +1,4 @@
+// Description: Holds all cube state and scramble generation logic.
 function isOBL(layer, obl) {
   // layer: 12-char string w/ BbWw, in cs
   // obl: a key of OBL dict

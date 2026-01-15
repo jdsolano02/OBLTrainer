@@ -1,4 +1,7 @@
-// Constantes de estado del cubo
+// File: JavaScript/Constants.js
+// Description: Holds all static data, constants, and definitions for the app.
+
+// --- Cube State Constants ---
 const CUBEL = 24;
 const HALF_L = 6;
 const LAYERL = 12;
@@ -8,7 +11,7 @@ const SOLVED_A = "bBBbBBbBBbBBwWWwWWwWWwWW";
 const SLICE_a = "WWwWWwBBbBBbBBbBBbWWwWWw";
 const SLICE_A = "wWWwWWbBBbBBbBBbBBwWWwWW";
 
-// Definiciones de casos OBL
+// --- OBL Case Definitions ---
 const OBL = {
   "1c": "BBwWWwWWwWWw",
   cadj: "BBwBBwWWwWWw",
@@ -51,7 +54,7 @@ const OBL = {
   "right yoshi": "WWwBBwWWbBBw",
 };
 
-// Notación Karnaugh y movimientos
+// --- Karnaugh Notation & Moves ---
 const KARN = {
   "3,0": "U",
   "-3,0": "U'",
@@ -107,7 +110,7 @@ const a_MOVES = [
 ];
 const KARNL = a_MOVES.length;
 
-// Notación avanzada
+// --- Advanced Notation ---
 const HIGHKARN = {
   "U U' U U' ": "U4 ",
   "U' U U' U ": "U4' ",
@@ -154,7 +157,7 @@ const HIGHKARN = {
   "-36 ": "U'D2",
 };
 
-// Optimización de Scrambles
+// --- Scramble Optimizations ---
 const OPTIM = {
   "/3,3/3,3/": "-3,-3/-3,-3",
   "/-3,-3/-3,-3/": "3,3/3,3",
@@ -169,83 +172,110 @@ const OPTIM = {
 };
 const OPTIM_KEYS = Array.from(Object.keys(OPTIM));
 
-// Datos de la aplicación
-const possibleOBL = [
-  ["", "1c", "1c"],
-  ["", "cadj", "cadj"],
-  ["", "cadj", "copp"],
-  ["", "copp", "copp"],
-  ["", "3c", "3c"],
-  ["", "4e", "4e"],
-  ["", "3e", "3e"],
-  ["", "line", "line"],
-  ["", "L", "line"],
-  ["", "L", "L"],
-  ["", "1e", "1e"],
-  ["good", "pair", "pair"],
-  ["bad", "pair", "pair"],
-  ["good", "arrow", "pair"],
-  ["bad", "arrow", "pair"],
-  ["good", "arrow", "arrow"],
-  ["bad", "arrow", "arrow"],
-  ["", "gem", "gem"],
-  ["", "gem", "knight"],
-  ["", "gem", "axe"],
-  ["", "gem", "squid"],
-  ["good", "knight", "knight"],
-  ["bad", "knight", "knight"],
-  ["good", "knight", "axe"],
-  ["bad", "knight", "axe"],
-  ["good", "axe", "axe"],
-  ["bad", "axe", "axe"],
-  ["", "squid", "knight"],
-  ["", "squid", "axe"],
-  ["", "squid", "squid"],
-  ["good", "thumb", "thumb"],
-  ["bad", "thumb", "thumb"],
-  ["good", "thumb", "bunny"],
-  ["bad", "thumb", "bunny"],
-  ["good", "bunny", "bunny"],
-  ["bad", "bunny", "bunny"],
-  ["", "shell", "shell"],
-  ["", "shell", "bird"],
-  ["", "shell", "hazard"],
-  ["", "yoshi", "shell"],
-  ["good", "bird", "bird"],
-  ["bad", "bird", "bird"],
-  ["", "bird", "hazard"],
-  ["", "hazard", "hazard"],
-  ["good", "yoshi", "bird"],
-  ["bad", "yoshi", "bird"],
-  ["", "yoshi", "hazard"],
-  ["good", "yoshi", "yoshi"],
-  ["bad", "yoshi", "yoshi"],
-  ["good", "kite", "kite"],
-  ["bad", "kite", "kite"],
-  ["good", "kite", "cut"],
-  ["bad", "kite", "cut"],
-  ["", "kite", "T"],
-  ["good", "kite", "N"],
-  ["bad", "kite", "N"],
-  ["", "kite", "tie"],
-  ["", "cut", "T"],
-  ["good", "cut", "N"],
-  ["bad", "cut", "N"],
-  ["", "cut", "tie"],
-  ["good", "cut", "cut"],
-  ["bad", "cut", "cut"],
-  ["good", "T", "T"],
-  ["bad", "T", "T"],
-  ["", "T", "N"],
-  ["good", "T", "tie"],
-  ["bad", "T", "tie"],
-  ["good", "N", "N"],
-  ["bad", "N", "N"],
-  ["", "tie", "N"],
-  ["good", "tie", "tie"],
-  ["bad", "tie", "tie"],
-];
+// --- *** OBL Case Groups (CORRECTED) *** ---
+// All case names are lowercase and match OBLtranslation keys.
+const OBL_GROUPS = {
+  "1 Slicer": [
+    ["good", "kite", "kite"], // Corrected format
+  ],
+  "2 Slicers": [
+    ["", "copp", "copp"],
+    ["", "line", "line"],
+    ["good", "thumb", "thumb"],
+    ["good", "pair", "pair"],
+    ["good", "N", "N"],
+  ],
+  "3 Slicers": [
+    ["good", "arrow", "pair"],
+    ["good", "arrow", "arrow"],
+    ["", "gem", "axe"],
+    ["good", "knight", "axe"],
+    ["good", "bunny", "bunny"],
+    ["good", "yoshi", "bird"],
+    ["", "yoshi", "shell"],
+    ["good", "kite", "cut"],
+    ["good", "kite", "N"],
+    ["good", "cut", "cut"],
+    ["good", "T", "T"],
+    ["good", "T", "tie"],
+    ["good", "tie", "tie"],
+  ],
+  "4 Slicers": [
+    ["", "cadj", "cadj"],
+    ["", "4e", "4e"],
+    ["", "L", "L"],
+    ["bad", "pair", "pair"],
+    ["bad", "arrow", "pair"],
+    ["bad", "arrow", "arrow"],
+    ["", "gem", "gem"],
+    ["", "gem", "knight"],
+    ["", "gem", "squid"],
+    ["good", "knight", "knight"],
+    ["bad", "knight", "axe"],
+    ["", "squid", "axe"],
+    ["", "squid", "knight"],
+    ["good", "thumb", "bunny"],
+    ["bad", "thumb", "bunny"],
+    ["", "shell", "shell"],
+    ["", "shell", "bird"],
+    ["", "shell", "hazard"],
+    ["good", "bird", "bird"],
+    ["", "bird", "hazard"],
+    ["bad", "yoshi", "bird"],
+    ["", "yoshi", "hazard"],
+    ["", "kite", "T"],
+    ["bad", "kite", "N"],
+    ["", "kite", "tie"],
+    ["", "cut", "T"],
+    ["good", "cut", "N"],
+    ["", "cut", "tie"],
+    ["bad", "T", "T"],
+    ["bad", "T", "tie"],
+    ["bad", "N", "N"],
+    ["bad", "tie", "tie"],
+  ],
+  "5 Slicers": [
+    ["", "1c", "1c"],
+    ["", "cadj", "copp"],
+    ["", "3c", "3c"],
+    ["", "3e", "3e"],
+    ["", "L", "line"],
+    ["", "1e", "1e"],
+    ["bad", "knight", "knight"],
+    ["good", "axe", "axe"],
+    ["bad", "axe", "axe"],
+    ["", "squid", "squid"],
+    ["bad", "thumb", "thumb"],
+    ["bad", "bunny", "bunny"],
+    ["bad", "bird", "bird"],
+    ["", "hazard", "hazard"],
+    ["good", "yoshi", "yoshi"],
+    ["bad", "yoshi", "yoshi"],
+    ["bad", "kite", "kite"],
+    ["bad", "cut", "N"],
+    ["", "T", "N"],
+    ["", "tie", "N"],
+  ],
+  "6 Slicers": [
+    ["bad", "kite", "cut"],
+    ["bad", "cut", "cut"],
+  ],
+};
 
+/**
+ * Helper function to get a flat array of all OBL cases from the groups.
+ * @returns {Array<Array<string>>} A flat array of all OBL cases.
+ */
+function getAllOblCases() {
+  let allCases = [];
+  for (const cases of Object.values(OBL_GROUPS)) {
+    // Using the correct variable name
+    allCases.push(...cases);
+  }
+  return allCases;
+}
+
+// --- App Data: OBL Case Translations ---
 const OBLtranslation = {
   "1c/1c": ["1c/1c"],
   "cadj/cadj": ["cadj/cadj"],
@@ -352,6 +382,7 @@ const OBLtranslation = {
   "bad tie/tie": ["black tie/white tie"],
 };
 
+// --- App Timer Constants ---
 const MIN_EACHCASE = 2;
 const MAX_EACHCASE = 4;
 const startDelay = 0;
